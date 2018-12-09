@@ -3,6 +3,26 @@ for details on configuring this project to bundle and minify static web assets. 
 body {
     padding-top: 50px;
     padding-bottom: 20px;
+    color: peru;
+}
+
+.navbar-inverse .navbar-nav > li > a {
+    color:peru;
+    border-bottom: none;
+}
+
+a.navbar-brand {
+    border-bottom: none;
+    color: peru;
+}
+
+a {
+    color: peru;
+    border-bottom: solid;
+}
+
+a:hover{
+    text-decoration: none;
 }
 
 /* Wrapping element */
@@ -28,6 +48,13 @@ body {
     margin: 15px;
 }
 
+.jumbotron h1, .jumbotron .h1 {
+    text-align: center;
+}
+
+.jumbotron {
+    background-color: papayawhip;
+}
 /* Hide/rearrange for smaller screens */
 @media screen and (max-width: 767px) {
     /* Hide captions */
