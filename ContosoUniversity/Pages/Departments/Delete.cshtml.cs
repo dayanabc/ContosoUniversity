@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using ContosoUniversity.Models;
 
-namespace ContosoUniversity.Pages.Instructors
+namespace ContosoUniversity.Pages.Departments
 {
     public class DeleteModel : PageModel
     {
@@ -19,7 +19,7 @@ namespace ContosoUniversity.Pages.Instructors
         }
 
         [BindProperty]
-        public Instructor Instructor { get; set; }
+        public Department Department { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -28,29 +28,31 @@ namespace ContosoUniversity.Pages.Instructors
                 return NotFound();
             }
 
-            Instructor = await _context.Instructors.FirstOrDefaultAsync(m => m.ID == id);
+            Department = await _context.Departments
+                .Include(d => d.Administrator).FirstOrDefaultAsync(m => m.DepartmentID == id);
 
-            if (Instructor == null)
+            if (Department == null)
             {
                 return NotFound();
             }
             return Page();
         }
 
-        public async Task<IActionResult> OnPostAsync(int id)
+        public async Task<IActionResult> OnPostAsync(int? id)
         {
-            Instructor instructor = await _context.Instructors
-                .Include(i => i.CourseAssignments)
-                .SingleAsync(i => i.ID == id);
+            if (id == null)
+            {
+                return NotFound();
+            }
 
-            var departments = await _context.Departments
-                .Where(d => d.InstructorID == id)
-                .ToListAsync();
-            departments.ForEach(d => d.InstructorID = null);
+            Department = await _context.Departments.FindAsync(id);
 
-            _context.Instructors.Remove(instructor);
+            if (Department != null)
+            {
+                _context.Departments.Remove(Department);
+                await _context.SaveChangesAsync();
+            }
 
-            await _context.SaveChangesAsync();
             return RedirectToPage("./Index");
         }
     }
