@@ -4,6 +4,15 @@ body {
     padding-top: 50px;
     padding-bottom: 20px;
     color: peru;
+    background-color: wheat;
+}
+
+.body-content {
+    background-color: papayawhip;
+}
+
+.navbar-inverse .navbar-brand {
+    color: peru;
 }
 
 .navbar-inverse .navbar-nav > li > a {
@@ -27,12 +36,19 @@ a:hover{
 
 td, th {
     padding: 5px;
-    /* text-align: left; */
     vertical-align: top;
 }
-    /* Wrapping element */
-    /* Set some basic padding to keep content from hitting the edges */
-    .body-content {
+
+.btn-default {
+    color: peru;
+}
+
+.row > div > h2, .row > div > p {
+    text-align: center;
+}
+/* Wrapping element */
+/* Set some basic padding to keep content from hitting the edges */
+.body-content {
     padding-left: 15px;
     padding-right: 15px;
 }
